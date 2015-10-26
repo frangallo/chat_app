@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Node.js Chat App</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
   </head>
   <body>
     Your message:
@@ -19,7 +19,7 @@
       var newMessageText = document.createTextNode(message);
 
       newMessageElement.appendChild(newMessageText);
-      messageElement.insertBefore(newMessageElement, lastMessageElement)
+      messagesElement.insertBefore(newMessageElement, lastMessageElement);
       lastMessageElement = newMessageElement;
     }
 
