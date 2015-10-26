@@ -1,0 +1,12 @@
+#input {
+  width: 200px;
+}
+
+#messages {
+  position: fixed;
+  top: 40px;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  border: 1px solid #EEEEEE; padding: 8px;
+}

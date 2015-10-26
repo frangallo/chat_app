@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Node.js Chat App</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    Your message:
+    <input type="text" id="input">
+
+    <div id="messages"></div>
+
+    <script src="http://localhost:4000/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+    var messagesElement = document.getElementById('messages');
+    var lastMessageElement = null;
+
+    function addMessage(message){
+      var newMessageElement = document.createElement('div');
+      var newMessageText = document.createTextNode(message);
+
+      newMessageElement.appendChild(newMessageText);
+      messageElement.insertBefore(newMessageElement, lastMessageElement)
+      lastMessageElement = newMessageElement;
+    }
+
+    var socket = io.connect('http://localhost:4000');
+    socket.on('serverMessage', function(content) {
+      addMessage(content);
+    });
+
+    var inputElement = document.getElementById('input');
+    inputElement.onkeydown = function(keyboardEvent) {
+      if (keyboardEvent.keyCode === 13) {
+        socket.emit('clientMessage', inputElement.value);
+        inputElement.value = '';
+        return false;
+      } else {
+        return true;
+      }
+    };
+    </script>
+  </body>
+</html>
