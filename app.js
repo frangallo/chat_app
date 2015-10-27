@@ -21,7 +21,12 @@ io.sockets.on('connection', function (socket) {
   socket.on('clientMessage', function(content) {
     socket.emit('serverMessage', 'You said: ' + content);
     username = socket.username
-    socket.broadcast.emit('serverMessage', username + ' said: ' + content);
+    room = socket.room
+    var broadcast = socket.broadcast
+    if (room){
+      broadcast.to(room);
+    }
+    broadcast.emit('serverMessage', username + ' said: ' + content);
   });
 
   socket.on('login', function(username) {
@@ -34,6 +39,10 @@ io.sockets.on('connection', function (socket) {
     username = socket.username
     socket.broadcast.emit('serverMessage', 'User ' + username + ' disconnected' )
   });
+
+  socket.on('join', function(room) {
+    room = socket.room
+  })
 
   socket.emit('login');
 
