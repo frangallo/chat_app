@@ -31,7 +31,8 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('disconnect', function(){
-
+    username = socket.username
+    socket.broadcast.emit('serverMessage', 'User ' + username + ' disconnected' )
   });
 
   socket.emit('login');
